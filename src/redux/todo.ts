@@ -1,4 +1,5 @@
 import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import isEmpty from "lodash/isEmpty";
 import { RootState } from "./store";
 
 type FilterType = "All" | "Active" | "Completed";
@@ -25,16 +26,24 @@ const todo = createSlice({
   initialState,
   reducers: {
     addTodo(state, action: PayloadAction<string>) {
-      const lastTodoIndex = state.todos?.[state.todos.length + 1]?.id;
-
-      state.todos = [
-        ...state.todos,
-        {
-          id: lastTodoIndex || 1,
-          task: action.payload,
-          complete: false,
-        },
-      ];
+      if (isEmpty(state.todos)) {
+        state.todos = [
+          {
+            id: 1,
+            task: action.payload,
+            complete: false,
+          },
+        ];
+      } else {
+        state.todos = [
+          ...state.todos,
+          {
+            id: state.todos[state.todos.length - 1].id || 1,
+            task: action.payload,
+            complete: false,
+          },
+        ];
+      }
     },
     updateFilter(state, action: PayloadAction<FilterType>) {
       state.filter = action.payload;

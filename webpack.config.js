@@ -66,6 +66,9 @@ module.exports = ({ mode, presets }) => {
       resolve: {
         extensions: [".js", ".ts", ".d.ts", ".css"],
       },
+      devServer: {
+        port: 3000,
+      },
       module: {
         rules: [
           {

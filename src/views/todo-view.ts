@@ -11,14 +11,67 @@ import { Todo } from "../redux/todo";
 
 @customElement("todo-view")
 class TodoView extends connect(store)(LitElement) {
+  //? state 정의 부분
   @property({ type: Array }) todos: Todo[] = [];
   @property({ type: String }) filter = "";
   @property({ type: String }) task = "";
 
   //* 업데이트 될때 실행 된다
+  //? 리덕스 값 불러오기를 이곳에서 하면 될듯
   stateChanged(state: RootState) {
+    console.log("redux 변경");
     this.todos = state.todos.todos;
     this.filter = state.todos.filter;
+  }
+  /*
+  someProperty.hasChanged
+  requestUpdate
+  performUpdate
+  shouldUpdate
+  update
+  render
+  firstUpdated
+  updated
+  updateComplete
+  */
+
+  attributeChangedCallback(name, oldvar, newvar) {
+    console.log(name, oldvar, newvar);
+    super.attributeChangedCallback(name, oldvar, newvar);
+  }
+
+  //* DOM에 컴포넌트가 추가 될 때
+  connectedCallback() {
+    super.connectedCallback();
+
+    setTimeout(() => {
+      this.task = "sadfaf";
+      // this.setAttribute("task", "이이이잉");
+    }, 3000);
+    console.log("mounted");
+  }
+
+  //* DOM에서 컴포넌트가 제거 될 때
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    console.log("unmount");
+  }
+
+  //* 첫 업데이트 시 수행
+  firstUpdated(changed) {
+    super.firstUpdated(changed);
+    console.log("first");
+  }
+
+  //* 업데이트 될때마다 수행
+  updated(changed) {
+    super.update(changed);
+    console.log("update");
+  }
+  //* 업데이트 해야할지
+  shouldUpdate(changed) {
+    super.shouldUpdate(changed);
+    return true;
   }
 
   render() {
@@ -59,7 +112,6 @@ class TodoView extends connect(store)(LitElement) {
           Add Todo
         </vaadin-button>
       </div>
-
       <div class="todos-list">
         ${this.todos.map(
           (todo) => html`
@@ -109,7 +161,6 @@ class TodoView extends connect(store)(LitElement) {
   }
 
   updateTask(e) {
-    console.log(e.target.value);
     this.task = e.target.value;
   }
 

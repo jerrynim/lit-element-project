@@ -3,6 +3,7 @@
 }
 
 html {
+  --gray_dd: #dddddd;
   --base-color: #fff;
   --dark-color: #2a3443;
   --shade-color: #5e6673;
@@ -15,9 +16,9 @@ html {
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Roboto', 'Segoe UI',
-    Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-    'Segoe UI Symbol';
+  font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Segoe UI",
+    Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol";
   margin: 0;
   padding: 0;
   color: var(--dark-color);
@@ -36,12 +37,6 @@ a {
 a:visited,
 a:active {
   color: var(--shade-color);
-}
-
-header,
-main,
-nav {
-  padding: var(--spacing);
 }
 
 nav {

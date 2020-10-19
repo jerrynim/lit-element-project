@@ -1,45 +1,16 @@
 import { LitElement, html, property, customElement, css } from "lit-element";
 import { connect } from "pwa-helpers";
-import { Portfolio } from "../../types/portfolio";
+import { Portfolio, PortfolioComment } from "../../types/portfolio";
 import { RootState, store } from "../redux/store";
 import { until } from "lit-html/directives/until.js";
 import { porfolioActions } from "../redux/portfolio";
 import { guard } from "lit-html/directives/guard";
 import { format } from "date-fns";
-import "../components/lit-image";
-import "./portfolio-detail-comments";
+import "../components/lit-textarea";
 
-const portfolioDetailCss = css`
-  .portfolio-detail-header {
-    position: sticky;
-    top: 0;
-    background-color: white;
-    opacity: 0.9;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.16);
-    height: 60px;
-  }
-  .portfolio-detail-contents {
-    max-width: 1160px;
-    margin: auto;
-    margin-bottom: 80px;
-  }
-  .portfolio-detail-title {
-    font-size: 24px;
-    font-weight: bold;
-    margin: 20px 0;
-  }
-  .portfolio-detail-photos {
+const portfolioDetailCommentsCss = css`
+  portfolio-detail-comments {
     width: 100%;
-  }
-  .portfolio-detail-photos img {
-    width: 100%;
-  }
-
-  .portfolio-detail-description {
-    max-width: 1160px;
-    margin: auto;
-    white-space: break-spaces;
-    text-align: center;
   }
   .container {
     width: 100%;
@@ -121,16 +92,19 @@ const portfolioDetailCss = css`
   }
 `;
 
-@customElement("portfolio-detail")
-class PortfolioDetail extends connect(store)(LitElement) {
+@customElement("portfolio-detail-comments")
+class PortfolioDetailComments extends connect(store)(LitElement) {
   //? state 정의 부분
-  @property({ type: Object }) portfolio: Portfolio | null = null;
+  @property({ type: Array }) comments: PortfolioComment[] = [];
   @property({ type: Boolean }) loading: boolean = false;
+  @property({ type: Boolean }) commentLoading: boolean = false;
+  @property({ type: String }) commentText: string = "";
 
   //* 리덕스 업데이트 될때 실행 된다
   stateChanged(state: RootState) {
-    this.portfolio = state.portfolio.detail.portfolio;
+    this.comments = state.portfolio.detail.portfolio?.comments || [];
     this.loading = state.portfolio.detail.loading;
+    this.commentLoading = state.portfolio.detail.commentLoading;
   }
 
   //* DOM에 컴포넌트가 추가 될 때
@@ -139,41 +113,18 @@ class PortfolioDetail extends connect(store)(LitElement) {
     store.dispatch(porfolioActions.getPortfolioRequest());
   }
 
+  update(changed) {
+    super.update(changed);
+    console.log(changed);
+  }
+
   render() {
     return html`
       <style>
-        ${portfolioDetailCss}
+        ${portfolioDetailCommentsCss}
       </style>
-      <div class="portfolio-detail-header"></div>
-
-      <div class="portfolio-detail-contents">
-        <div class="portfolio-detail-title">${this.portfolio?.title}</div>
-        <!-- <div class="portfolio-detail-createdAt">
-          ${this.portfolio?.createdAt
-          ? format(new Date(this.portfolio.createdAt), "yyyy.MM.dd")
-          : undefined}
-        </div>
-        ${guard([this.portfolio, this.loading], () => {
-          return html`${!this.loading && this.portfolio
-            ? html`<div class="portfolio-detail-photos">
-                  ${this.portfolio?.photos.map(
-                    (photo) => html`<lit-image src="${photo}" />`
-                  )}
-                </div>
-                <p class="portfolio-detail-description">
-                  ${this.portfolio?.description}
-                </p>`
-            : html`<div class="container">
-                <div class="bar">
-                  <div class="indicator"></div>
-                </div>
-                <div class="wrapper">
-                  <div class="list"></div>
-                </div>
-              </div>`}`;
-        })} -->
-
-        <portfolio-detail-comments></portfolio-detail-comments>
+      <div class="portfolio-detail-comments-box">
+        <lit-textarea value=${this.commentText}></lit-textarea>
       </div>
     `;
   }
@@ -181,6 +132,6 @@ class PortfolioDetail extends connect(store)(LitElement) {
 
 declare global {
   interface HTMLElementTagNameMap {
-    "portfolio-detail": PortfolioDetail;
+    "portfolio-detail-comments": PortfolioDetailComments;
   }
 }

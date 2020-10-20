@@ -8,6 +8,7 @@ import { guard } from "lit-html/directives/guard";
 import { format } from "date-fns";
 import "../components/lit-image";
 import "./portfolio-detail-comments";
+import globalStyle from "../styles/globalStyle";
 
 const portfolioDetailCss = css`
   .portfolio-detail-header {
@@ -22,6 +23,11 @@ const portfolioDetailCss = css`
     max-width: 1160px;
     margin: auto;
     margin-bottom: 80px;
+  }
+  @media only screen and (max-width: 1024px) {
+    .portfolio-detail-contents {
+      padding: 0 20px;
+    }
   }
   .portfolio-detail-title {
     font-size: 24px;
@@ -49,7 +55,7 @@ const portfolioDetailCss = css`
     overflow: hidden;
     margin: 0 auto;
     height: 100vh;
-    padding: 80px;
+    padding: 80px 0;
   }
 
   .wrapper {
@@ -139,19 +145,22 @@ class PortfolioDetail extends connect(store)(LitElement) {
     store.dispatch(porfolioActions.getPortfolioRequest());
   }
 
+  static asd = "ASdf";
+
   render() {
     return html`
       <style>
+        ${globalStyle}
         ${portfolioDetailCss}
       </style>
-      <div class="portfolio-detail-header"></div>
+      <div class="portfolio-detail-header" @click=${this.click}>dd</div>
 
       <div class="portfolio-detail-contents">
         <div class="portfolio-detail-title">${this.portfolio?.title}</div>
-        <!-- <div class="portfolio-detail-createdAt">
+        <div class="portfolio-detail-createdAt">
           ${this.portfolio?.createdAt
-          ? format(new Date(this.portfolio.createdAt), "yyyy.MM.dd")
-          : undefined}
+            ? format(new Date(this.portfolio.createdAt), "yyyy.MM.dd")
+            : undefined}
         </div>
         ${guard([this.portfolio, this.loading], () => {
           return html`${!this.loading && this.portfolio
@@ -171,7 +180,7 @@ class PortfolioDetail extends connect(store)(LitElement) {
                   <div class="list"></div>
                 </div>
               </div>`}`;
-        })} -->
+        })}
 
         <portfolio-detail-comments></portfolio-detail-comments>
       </div>

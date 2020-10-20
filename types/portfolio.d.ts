@@ -1,7 +1,9 @@
 export type PortfolioComment = {
   id: number;
   text: string;
+  author: { id: number; nickname: string; profilePhoto: string };
   replies: PortfolioComment[];
+  createdAt: string;
 };
 
 export type Portfolio = {
@@ -29,7 +31,7 @@ export type Portfolio = {
     nickname: string;
     profilePhoto: string;
   };
-  comments: [];
+  comments: PortfolioComment[];
   tags: string[];
   likeCount: number;
   viewCount: number;

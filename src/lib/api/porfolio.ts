@@ -1,5 +1,6 @@
 import { update } from "lodash";
-import { Portfolio } from "../../../types/portfolio";
+import { Portfolio, PortfolioComment } from "../../../types/portfolio";
+import axios from "./apiClient";
 
 const data: Portfolio = {
   id: 1,
@@ -66,11 +67,209 @@ const data: Portfolio = {
   updatedAt: "2020-10-16T08:13:43.467Z",
 };
 
+const comments: PortfolioComment[] = [
+  {
+    id: 1,
+    text:
+      "디자인도 디자인인데 영상도 너무너무 잘만드셨습니다. 뉴모피즘 인가요? 적용한 디자인들을 보고있는데 매력적이에요 ㅎㅎ",
+    author: {
+      id: 1,
+      nickname: "yungdi",
+      profilePhoto:
+        "https://api.miniintern.com/images/profile/profile_image_default.svg",
+    },
+    replies: [
+      {
+        id: 111,
+        text: "네! 뉴모피즘입니다! 감사합니다",
+        author: {
+          id: 111,
+          nickname: "이온",
+          profilePhoto:
+            "https://api.miniintern.com/images/profile/profile_image_default.svg",
+        },
+        replies: [
+          {
+            id: 111,
+            text: "네! 뉴모피즘입니다! 감사합니다",
+            author: {
+              id: 111,
+              nickname: "이온",
+              profilePhoto:
+                "https://api.miniintern.com/images/profile/profile_image_default.svg",
+            },
+            replies: [
+              {
+                id: 111,
+                text: "네! 뉴모피즘입니다! 감사합니다",
+                author: {
+                  id: 111,
+                  nickname: "이온",
+                  profilePhoto:
+                    "https://api.miniintern.com/images/profile/profile_image_default.svg",
+                },
+                replies: [
+                  {
+                    id: 111,
+                    text: "네! 뉴모피즘입니다! 감사합니다",
+                    author: {
+                      id: 111,
+                      nickname: "이온",
+                      profilePhoto:
+                        "https://api.miniintern.com/images/profile/profile_image_default.svg",
+                    },
+                    replies: [
+                      {
+                        id: 111,
+                        text: "네! 뉴모피즘입니다! 감사합니다",
+                        author: {
+                          id: 111,
+                          nickname: "이온",
+                          profilePhoto:
+                            "https://api.miniintern.com/images/profile/profile_image_default.svg",
+                        },
+                        replies: [
+                          {
+                            id: 111,
+                            text: "네! 뉴모피즘입니다! 감사합니다",
+                            author: {
+                              id: 111,
+                              nickname: "이온",
+                              profilePhoto:
+                                "https://api.miniintern.com/images/profile/profile_image_default.svg",
+                            },
+                            replies: [
+                              {
+                                id: 111,
+                                text: "네! 뉴모피즘입니다! 감사합니다",
+                                author: {
+                                  id: 111,
+                                  nickname: "이온",
+                                  profilePhoto:
+                                    "https://api.miniintern.com/images/profile/profile_image_default.svg",
+                                },
+                                replies: [
+                                  {
+                                    id: 111,
+                                    text: "네! 뉴모피즘입니다! 감사합니다",
+                                    author: {
+                                      id: 111,
+                                      nickname: "이온",
+                                      profilePhoto:
+                                        "https://api.miniintern.com/images/profile/profile_image_default.svg",
+                                    },
+                                    replies: [
+                                      {
+                                        id: 111,
+                                        text: "네! 뉴모피즘입니다! 감사합니다",
+                                        author: {
+                                          id: 111,
+                                          nickname: "이온",
+                                          profilePhoto:
+                                            "https://api.miniintern.com/images/profile/profile_image_default.svg",
+                                        },
+                                        replies: [],
+                                        createdAt: new Date().toISOString(),
+                                      },
+                                    ],
+                                    createdAt: new Date().toISOString(),
+                                  },
+                                ],
+                                createdAt: new Date().toISOString(),
+                              },
+                            ],
+                            createdAt: new Date().toISOString(),
+                          },
+                        ],
+                        createdAt: new Date().toISOString(),
+                      },
+                    ],
+                    createdAt: new Date().toISOString(),
+                  },
+                ],
+                createdAt: new Date().toISOString(),
+              },
+            ],
+            createdAt: new Date().toISOString(),
+          },
+        ],
+        createdAt: new Date().toISOString(),
+      },
+    ],
+    createdAt: new Date().toISOString(),
+  },
+  {
+    id: 2,
+    text:
+      "디자인도 디자인인데 영상도 너무너무 잘만드셨습니다. 뉴모피즘 인가요? 적용한 디자인들을 보고있는데 매력적이에요 ㅎㅎ",
+    author: {
+      id: 1,
+      nickname: "yungdi",
+      profilePhoto:
+        "https://api.miniintern.com/images/profile/profile_image_default.svg",
+    },
+    replies: [],
+    createdAt: new Date().toISOString(),
+  },
+  {
+    id: 3,
+    text:
+      "디자인도 디자인인데 영상도 너무너무 잘만드셨습니다. 뉴모피즘 인가요? 적용한 디자인들을 보고있는데 매력적이에요 ㅎㅎ",
+    author: {
+      id: 1,
+      nickname: "yungdi",
+      profilePhoto:
+        "https://api.miniintern.com/images/profile/profile_image_default.svg",
+    },
+    replies: [],
+    createdAt: new Date().toISOString(),
+  },
+  {
+    id: 4,
+    text:
+      "디자인도 디자인인데 영상도 너무너무 잘만드셨습니다. 뉴모피즘 인가요? 적용한 디자인들을 보고있는데 매력적이에요 ㅎㅎ",
+    author: {
+      id: 1,
+      nickname: "yungdi",
+      profilePhoto:
+        "https://api.miniintern.com/images/profile/profile_image_default.svg",
+    },
+    replies: [],
+    createdAt: new Date().toISOString(),
+  },
+  {
+    id: 5,
+    text:
+      "디자인도 디자인인데 영상도 너무너무 잘만드셨습니다. 뉴모피즘 인가요? 적용한 디자인들을 보고있는데 매력적이에요 ㅎㅎ",
+    author: {
+      id: 1,
+      nickname: "yungdi",
+      profilePhoto:
+        "https://api.miniintern.com/images/profile/profile_image_default.svg",
+    },
+    replies: [],
+    createdAt: new Date().toISOString(),
+  },
+];
+//* 포트폴리오 상세 불러오기 API
 export const getPortfolioAPI = () => {
   const portfolio = new Promise<Portfolio>((resolve, reject) => {
     setTimeout(() => {
       resolve(data);
-    }, 3000);
+    }, 10);
   });
   return portfolio;
 };
+
+//* 포트폴리오 댓글 불러오기 API
+export const getPorfolioCommentsAPI = () => {
+  const portfolio = new Promise<PortfolioComment[]>((resolve, reject) => {
+    setTimeout(() => {
+      resolve(comments);
+    }, 10);
+  });
+  return portfolio;
+};
+
+//* 포트폴리오 댓글 작성하기 API
+export const addPortfolioCommentAPI = () => axios.post("");

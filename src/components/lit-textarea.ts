@@ -10,15 +10,12 @@ import {
 import pallete from "../styles/pallete";
 
 const litTextareaCss = css`
-  lit-textarea {
-    width: 100%;
-  }
   textarea {
     width: 100%;
     padding: 16px;
     resize: none;
     outline: none;
-    min-height: 120px;
+    min-height: 150px;
     border-radius: 4px;
     border-color: var(--gray_dd);
     overflow: hidden;
@@ -29,18 +26,16 @@ const litTextareaCss = css`
 @customElement("lit-textarea")
 class LitTextarea extends LitElement {
   //? state 정의 부분
-  @property({ type: String }) value: string | undefined = "";
+  @property({ type: String, attribute: true }) value: string | undefined = "";
+  @property({ attribute: false }) onChange = (text: string) => {};
+  @property({ type: String }) placeholder = "";
 
   @query("#textarea")
   textarea: HTMLTextAreaElement | null = null;
 
-  update(changed) {
-    super.update(changed);
-    console.log(changed);
-  }
-
   handleOnChange(e: any) {
-    this.value = e.currentTarget.value;
+    this.onChange(e.target.value);
+    this.value = e.target.value;
     const offset = this.textarea!.offsetHeight - this.textarea!.clientHeight;
     this.textarea!.style.height = "auto";
     this.textarea!.style.height = this.textarea!.scrollHeight + offset + "px";
@@ -53,8 +48,9 @@ class LitTextarea extends LitElement {
       </style>
       <textarea
         id="textarea"
-        src="${this.value || ""}"
-        @input="${this.handleOnChange}"
+        placeholder="${this.placeholder}"
+        .value="${this.value || ""}"
+        @keyup="${this.handleOnChange}"
       ></textarea>
     `;
   }

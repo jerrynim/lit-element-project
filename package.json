@@ -51,6 +51,7 @@
     "@types/axios": "^0.14.0",
     "@types/lodash": "^4.14.162",
     "@types/styled-jsx": "^2.2.8",
+    "@vaadin/router": "^1.7.2",
     "@vaadin/vaadin-button": "^2.1.0",
     "@vaadin/vaadin-checkbox": "^2.2.4",
     "@vaadin/vaadin-radio-button": "^1.1.2",

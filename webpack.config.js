@@ -5,7 +5,9 @@ const webpackMerge = require("webpack-merge");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 const path = require("path");
-
+const dotenv = require("dotenv").config({
+  path: path.join(__dirname, ".env"),
+});
 const modeConfig = (env) =>
   require(`./build-utils/webpack.${env.mode}.js`)(env);
 const loadPresets = require("./build-utils/loadPresets");
@@ -32,8 +34,8 @@ const polyfills = [
 
 const assets = [
   {
-    from: "src/img",
-    to: "img/",
+    from: "public",
+    to: "/public",
   },
 ];
 
@@ -55,7 +57,22 @@ const plugins = [
 ];
 const appIndex = path.resolve(__dirname, "src", "index.ts");
 
-module.exports = ({ mode, presets }) => {
+function getClientEnv(nodeEnv) {
+  return {
+    "process.env": JSON.stringify(
+      Object.keys(dotenv.parsed).reduce(
+        (env, key) => {
+          env[key] = process.env[key];
+          return env;
+        },
+        { NODE_ENV: nodeEnv.mode }
+      )
+    ),
+  };
+}
+module.exports = (webpackEnv) => {
+  const { mode, presets } = webpackEnv;
+  env = getClientEnv(webpackEnv);
   return webpackMerge(
     {
       mode,
@@ -90,7 +107,12 @@ module.exports = ({ mode, presets }) => {
           },
         ],
       },
-      plugins,
+      plugins: [
+        ...plugins,
+        new webpack.DefinePlugin({
+          "process.env": env,
+        }),
+      ],
     },
     modeConfig({ mode, presets }),
     loadPresets({ mode, presets })

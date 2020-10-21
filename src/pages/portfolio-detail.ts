@@ -1,5 +1,13 @@
-import { LitElement, html, property, customElement, css } from "lit-element";
+import {
+  LitElement,
+  html,
+  property,
+  customElement,
+  css,
+  svg,
+} from "lit-element";
 import { connect } from "pwa-helpers";
+import { unsafeSVG } from "lit-html/directives/unsafe-svg";
 import { Portfolio } from "../../types/portfolio";
 import { RootState, store } from "../redux/store";
 import { until } from "lit-html/directives/until.js";
@@ -9,9 +17,13 @@ import { format } from "date-fns";
 import "../components/lit-image";
 import "./portfolio-detail-comments";
 import globalStyle from "../styles/globalStyle";
+import MNLogo from "../../public/statics/svgs/logo_header.svg";
 
 const portfolioDetailCss = css`
   .portfolio-detail-header {
+    display: flex;
+    align-items: center;
+    padding: 0 80px;
     position: sticky;
     top: 0;
     background-color: white;
@@ -145,15 +157,13 @@ class PortfolioDetail extends connect(store)(LitElement) {
     store.dispatch(porfolioActions.getPortfolioRequest());
   }
 
-  static asd = "ASdf";
-
   render() {
     return html`
       <style>
         ${globalStyle}
         ${portfolioDetailCss}
       </style>
-      <div class="portfolio-detail-header" @click=${this.click}>dd</div>
+      <div class="portfolio-detail-header">${MNLogo}</div>
 
       <div class="portfolio-detail-contents">
         <div class="portfolio-detail-title">${this.portfolio?.title}</div>

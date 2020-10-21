@@ -11,7 +11,7 @@ class LitImage extends LitElement {
   //? state 정의 부분
   @property({ type: String }) src: string | undefined;
 
-  onLoadError(e) {
+  onLoadError(e: any) {
     this.src = "";
   }
 

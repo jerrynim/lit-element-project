@@ -88,111 +88,7 @@ const comments: PortfolioComment[] = [
           profilePhoto:
             "https://api.miniintern.com/images/profile/profile_image_default.svg",
         },
-        replies: [
-          {
-            id: 111,
-            text: "네! 뉴모피즘입니다! 감사합니다",
-            author: {
-              id: 111,
-              nickname: "이온",
-              profilePhoto:
-                "https://api.miniintern.com/images/profile/profile_image_default.svg",
-            },
-            replies: [
-              {
-                id: 111,
-                text: "네! 뉴모피즘입니다! 감사합니다",
-                author: {
-                  id: 111,
-                  nickname: "이온",
-                  profilePhoto:
-                    "https://api.miniintern.com/images/profile/profile_image_default.svg",
-                },
-                replies: [
-                  {
-                    id: 111,
-                    text: "네! 뉴모피즘입니다! 감사합니다",
-                    author: {
-                      id: 111,
-                      nickname: "이온",
-                      profilePhoto:
-                        "https://api.miniintern.com/images/profile/profile_image_default.svg",
-                    },
-                    replies: [
-                      {
-                        id: 111,
-                        text: "네! 뉴모피즘입니다! 감사합니다",
-                        author: {
-                          id: 111,
-                          nickname: "이온",
-                          profilePhoto:
-                            "https://api.miniintern.com/images/profile/profile_image_default.svg",
-                        },
-                        replies: [
-                          {
-                            id: 111,
-                            text: "네! 뉴모피즘입니다! 감사합니다",
-                            author: {
-                              id: 111,
-                              nickname: "이온",
-                              profilePhoto:
-                                "https://api.miniintern.com/images/profile/profile_image_default.svg",
-                            },
-                            replies: [
-                              {
-                                id: 111,
-                                text: "네! 뉴모피즘입니다! 감사합니다",
-                                author: {
-                                  id: 111,
-                                  nickname: "이온",
-                                  profilePhoto:
-                                    "https://api.miniintern.com/images/profile/profile_image_default.svg",
-                                },
-                                replies: [
-                                  {
-                                    id: 111,
-                                    text: "네! 뉴모피즘입니다! 감사합니다",
-                                    author: {
-                                      id: 111,
-                                      nickname: "이온",
-                                      profilePhoto:
-                                        "https://api.miniintern.com/images/profile/profile_image_default.svg",
-                                    },
-                                    replies: [
-                                      {
-                                        id: 111,
-                                        text: "네! 뉴모피즘입니다! 감사합니다",
-                                        author: {
-                                          id: 111,
-                                          nickname: "이온",
-                                          profilePhoto:
-                                            "https://api.miniintern.com/images/profile/profile_image_default.svg",
-                                        },
-                                        replies: [],
-                                        createdAt: new Date().toISOString(),
-                                      },
-                                    ],
-                                    createdAt: new Date().toISOString(),
-                                  },
-                                ],
-                                createdAt: new Date().toISOString(),
-                              },
-                            ],
-                            createdAt: new Date().toISOString(),
-                          },
-                        ],
-                        createdAt: new Date().toISOString(),
-                      },
-                    ],
-                    createdAt: new Date().toISOString(),
-                  },
-                ],
-                createdAt: new Date().toISOString(),
-              },
-            ],
-            createdAt: new Date().toISOString(),
-          },
-        ],
+        replies: [],
         createdAt: new Date().toISOString(),
       },
     ],
@@ -256,7 +152,7 @@ export const getPortfolioAPI = () => {
   const portfolio = new Promise<Portfolio>((resolve, reject) => {
     setTimeout(() => {
       resolve(data);
-    }, 10);
+    }, 3000);
   });
   return portfolio;
 };
@@ -266,7 +162,7 @@ export const getPorfolioCommentsAPI = () => {
   const portfolio = new Promise<PortfolioComment[]>((resolve, reject) => {
     setTimeout(() => {
       resolve(comments);
-    }, 10);
+    }, 5000);
   });
   return portfolio;
 };

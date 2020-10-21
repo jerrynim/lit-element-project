@@ -33,9 +33,14 @@ const portfolioCommentCss = css`
 @customElement("portfolio-comment")
 class PortfolioComment extends LitElement {
   //? state 정의 부분
-  @property({ type: Object }) comment: PortfolioCommentType;
+  @property({ type: Object }) comment:
+    | PortfolioCommentType
+    | undefined = undefined;
 
   render() {
+    if (!this.comment) {
+      return null;
+    }
     return html`
       <style>
         ${globalStyle}

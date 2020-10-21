@@ -1,6 +1,8 @@
 import "./styles.css";
 import "./pages/portfolio-detail";
 import "./pages/todo-view";
+import "./components/portal-component";
+
 import { Router } from "@vaadin/router";
 
 window.addEventListener("load", () => {

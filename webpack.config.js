@@ -105,6 +105,10 @@ module.exports = (webpackEnv) => {
               ],
             },
           },
+          {
+            test: /\.svg$/,
+            loader: "lit-svg-loader",
+          },
         ],
       },
       plugins: [

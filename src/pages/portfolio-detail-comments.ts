@@ -1,4 +1,11 @@
-import { LitElement, html, property, customElement, css } from "lit-element";
+import {
+  LitElement,
+  html,
+  property,
+  customElement,
+  css,
+  query,
+} from "lit-element";
 import { connect } from "pwa-helpers";
 import { Portfolio, PortfolioComment } from "../../types/portfolio";
 import { RootState, store } from "../redux/store";
@@ -9,6 +16,7 @@ import { format } from "date-fns";
 import "../components/lit-textarea";
 import globalStyle from "../styles/globalStyle";
 import "./portfolio-comment";
+import { render } from "lit-html";
 
 const portfolioDetailCommentsCss = css`
   .portfolio-detail-comments {
@@ -126,9 +134,11 @@ class PortfolioDetailComments extends connect(store)(LitElement) {
   }
 
   addComment() {
-    // store.dispatch(porfolioActions.)
+    render(
+      html`<div>안녕asdfasdfasdfsa</div>`,
+      document.querySelector("portal-component")!
+    );
   }
-
   render() {
     return html`
       <style>
@@ -143,7 +153,10 @@ class PortfolioDetailComments extends connect(store)(LitElement) {
             .onChange=${this.setCommentText}
             placeholder="이 작품에 대한 댓글을 남겨보세요."
           ></lit-textarea>
-          <button class="portfolio-detail-write-comment-button">
+          <button
+            class="portfolio-detail-write-comment-button"
+            @click="${this.addComment}"
+          >
             댓글작성
           </button>
         </div>

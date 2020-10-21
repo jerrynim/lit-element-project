@@ -7,10 +7,8 @@ import {
   svg,
 } from "lit-element";
 import { connect } from "pwa-helpers";
-import { unsafeSVG } from "lit-html/directives/unsafe-svg";
 import { Portfolio } from "../../types/portfolio";
 import { RootState, store } from "../redux/store";
-import { until } from "lit-html/directives/until.js";
 import { porfolioActions } from "../redux/portfolio";
 import { guard } from "lit-html/directives/guard";
 import { format } from "date-fns";
@@ -26,25 +24,34 @@ const portfolioDetailCss = css`
     padding: 0 80px;
     position: sticky;
     top: 0;
+    z-index: 10;
     background-color: white;
     opacity: 0.9;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.16);
     height: 60px;
   }
   .portfolio-detail-contents {
+    position: relative;
     max-width: 1160px;
     margin: auto;
     margin-bottom: 80px;
   }
-  @media only screen and (max-width: 1024px) {
-    .portfolio-detail-contents {
-      padding: 0 20px;
-    }
-  }
+
   .portfolio-detail-title {
     font-size: 24px;
     font-weight: bold;
-    margin: 20px 0;
+    margin: 20px 0 0;
+  }
+  .portfolio-detail-info {
+    font-size: 12px;
+    margin-bottom: 20px;
+    color: var(--gray_71);
+  }
+  .portfolio-detail-counts {
+    font-size: 20px;
+    right: 20px;
+    position: absolute;
+    top: 16px;
   }
   .portfolio-detail-photos {
     width: 100%;
@@ -58,6 +65,17 @@ const portfolioDetailCss = css`
     margin: auto;
     white-space: break-spaces;
     text-align: center;
+  }
+  .portfolio-detail-author {
+    display: flex;
+    align-items: center;
+  }
+
+  .portfolio-detail-author img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 20px;
   }
   .container {
     width: 100%;
@@ -137,6 +155,14 @@ const portfolioDetailCss = css`
       opacity: 0;
     }
   }
+  @media only screen and (max-width: 1024px) {
+    .portfolio-detail-contents {
+      padding: 0 20px;
+    }
+    .container {
+      padding: 0 20px;
+    }
+  }
 `;
 
 @customElement("portfolio-detail")
@@ -164,34 +190,49 @@ class PortfolioDetail extends connect(store)(LitElement) {
         ${portfolioDetailCss}
       </style>
       <div class="portfolio-detail-header">${MNLogo}</div>
+      ${guard([this.portfolio, this.loading], () => {
+        return html`${!this.loading && this.portfolio
+          ? html`
+              <div class="portfolio-detail-contents">
+                <div class="portfolio-detail-title">
+                  ${this.portfolio?.title}
+                </div>
 
-      <div class="portfolio-detail-contents">
-        <div class="portfolio-detail-title">${this.portfolio?.title}</div>
-        <div class="portfolio-detail-createdAt">
-          ${this.portfolio?.createdAt
-            ? format(new Date(this.portfolio.createdAt), "yyyy.MM.dd")
-            : undefined}
-        </div>
-        ${guard([this.portfolio, this.loading], () => {
-          return html`${!this.loading && this.portfolio
-            ? html`<div class="portfolio-detail-photos">
-                  ${this.portfolio?.photos.map(
-                    (photo) => html`<lit-image src="${photo}" />`
+                <div class="portfolio-detail-info">
+                  ${this.portfolio?.createdAt
+                    ? format(new Date(this.portfolio.createdAt), "yyyy.MM.dd")
+                    : undefined}
+                  ${this.portfolio?.contents.map((content) => `${content}, `)}
+                </div>
+                <div class="portfolio-detail-counts">
+                  좋아요 ${this.portfolio?.likesCount} 조회수
+                  ${this.portfolio?.viewCount} 미리보기
+                  ${this.portfolio?.pdfImageCount}
+                </div>
+                <div class="portfolio-detail-photos">
+                  ${this.portfolio?.pdfImages.map(
+                    (photo) => html`<lit-image src="${photo.path}" />`
                   )}
                 </div>
                 <p class="portfolio-detail-description">
                   ${this.portfolio?.description}
-                </p>`
-            : html`<div class="container">
-                <div class="bar">
-                  <div class="indicator"></div>
+                </p>
+                <div class="portfolio-detail-author">
+                  <img src="${this.portfolio?.author.thumbnail || ""}" />
+                  ${this.portfolio?.author.username}
                 </div>
-                <div class="wrapper">
-                  <div class="list"></div>
-                </div>
-              </div>`}`;
-        })}
-
+              </div>
+            `
+          : html`<div class="container">
+              <div class="bar">
+                <div class="indicator"></div>
+              </div>
+              <div class="wrapper">
+                <div class="list"></div>
+              </div>
+            </div>`}`;
+      })}
+      
         <portfolio-detail-comments></portfolio-detail-comments>
       </div>
     `;

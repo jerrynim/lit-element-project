@@ -17,6 +17,11 @@ import "../components/lit-textarea";
 import globalStyle from "../styles/globalStyle";
 import "./portfolio-comment";
 import { render } from "lit-html";
+import {
+  addPortfolioAPI,
+  getPortfolioAPI,
+  loginAPI,
+} from "../lib/api/porfolio";
 
 const portfolioDetailCommentsCss = css`
   .portfolio-detail-comments {
@@ -106,6 +111,11 @@ const portfolioDetailCommentsCss = css`
     padding: 0;
     list-style: none;
   }
+  @media only screen and (max-width: 1024px) {
+    .portfolio-detail-comments-box {
+      padding: 0 20px;
+    }
+  }
 `;
 
 @customElement("portfolio-detail-comments")
@@ -133,9 +143,11 @@ class PortfolioDetailComments extends connect(store)(LitElement) {
     this.commentText = text;
   }
 
-  addComment() {
+  async addComment() {
+    await loginAPI();
+    await addPortfolioAPI();
     render(
-      html`<div>안녕asdfasdfasdfsa</div>`,
+      html`<div>댓글은 아직이에용.</div>`,
       document.querySelector("portal-component")!
     );
   }

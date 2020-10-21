@@ -25,8 +25,8 @@ function initRouter() {
     },
     {
       path: "(.*)",
-      component: "not-found-view",
-      action: () => import("./pages/portfolio-detail"),
+      component: "page-404",
+      action: () => import("./pages/page-404"),
     },
   ]);
 }

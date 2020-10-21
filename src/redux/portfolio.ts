@@ -39,6 +39,64 @@ const porfolio = createSlice({
     getPorfolioSuccess(state, action: PayloadAction<Portfolio>) {
       state.detail.loading = false;
       state.detail.portfolio = action.payload;
+      state.detail.portfolio.comments = [
+        {
+          id: 1,
+          text:
+            "디자인도 디자인인데 영상도 너무너무 잘만드셨습니다. 뉴모피즘 인가요? 적용한 디자인들을 보고있는데 매력적이에요 ㅎㅎ",
+          author: {
+            id: "1",
+            username: "yungdi",
+            thumbnail:
+              "https://api.miniintern.com/images/profile/profile_image_default.svg",
+            createdAt: new Date().toISOString(),
+          },
+          replies: [
+            {
+              id: 111,
+              text: "네! 뉴모피즘입니다! 감사합니다",
+              author: {
+                id: "111",
+                username: "이온",
+                thumbnail:
+                  "https://api.miniintern.com/images/profile/profile_image_default.svg",
+                createdAt: new Date().toISOString(),
+              },
+              replies: [],
+              createdAt: new Date().toISOString(),
+            },
+          ],
+          createdAt: new Date().toISOString(),
+        },
+        {
+          id: 2,
+          text:
+            "디자인도 디자인인데 영상도 너무너무 잘만드셨습니다. 뉴모피즘 인가요? 적용한 디자인들을 보고있는데 매력적이에요 ㅎㅎ",
+          author: {
+            id: "1",
+            username: "yungdi",
+            thumbnail:
+              "https://api.miniintern.com/images/profile/profile_image_default.svg",
+            createdAt: new Date().toISOString(),
+          },
+          replies: [],
+          createdAt: new Date().toISOString(),
+        },
+        {
+          id: 3,
+          text:
+            "디자인도 디자인인데 영상도 너무너무 잘만드셨습니다. 뉴모피즘 인가요? 적용한 디자인들을 보고있는데 매력적이에요 ㅎㅎ",
+          author: {
+            id: "1",
+            username: "yungdi",
+            thumbnail:
+              "https://api.miniintern.com/images/profile/profile_image_default.svg",
+            createdAt: new Date().toISOString(),
+          },
+          replies: [],
+          createdAt: new Date().toISOString(),
+        },
+      ];
     },
     //* 포트폴리오 상세 불러오기 fail
     getPorfolioFail(state, action: PayloadAction<undefined>) {
@@ -79,7 +137,7 @@ function* watchGetPorfolio() {
   } = porfolioActions;
   yield takeLatest(getPortfolioRequest, function* (action) {
     try {
-      const data = yield call(getPortfolioAPI);
+      const { data } = yield call(getPortfolioAPI);
       yield put(getPorfolioSuccess(data));
     } catch (err) {
       yield put(getPorfolioFail());

@@ -47,10 +47,10 @@ class PortfolioComment extends LitElement {
         ${portfolioCommentCss}
       </style>
       <li>
-        <img src=${this.comment.author.profilePhoto} />
+        <img src=${this.comment.author.thumbnail} />
         <div class="portfolio-detail-comment-author-texts">
           <b class="portfolio-detail-comment-author-nickname"
-            >${this.comment.author.nickname}
+            >${this.comment.author.username}
             <span class="portfolio-detail-comment-createdAt"
               >${format(new Date(this.comment.createdAt), "yyyy.MM.dd")}</span
             >

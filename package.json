@@ -8,6 +8,7 @@
     "webpack-dev-server": "webpack-dev-server --history-api-fallback",
     "prod": "npm run webpack -- --env.mode production --env.presets serviceworker",
     "dev": "npm run webpack-dev-server -- --env.mode development",
+    "start": "npm run webpack-dev-server -- --env.mode development",
     "dev:sw": "npm run webpack-dev-server -- --env.mode development  --env.presets serviceworker"
   },
   "repository": {
@@ -43,19 +44,14 @@
     "webpack-cli": "^3.0.8",
     "webpack-dev-server": "^3.1.14",
     "webpack-merge": "^4.1.3",
-    "workbox-webpack-plugin": "^3.3.1"
+    "workbox-webpack-plugin": "^3.3.1",
+    "@types/axios": "^0.14.0",
+    "@types/lodash": "^4.14.162"
   },
   "dependencies": {
-    "@emotion/core": "^10.0.35",
     "@reduxjs/toolkit": "^1.4.0",
-    "@types/axios": "^0.14.0",
-    "@types/lodash": "^4.14.162",
     "@types/styled-jsx": "^2.2.8",
     "@vaadin/router": "^1.7.2",
-    "@vaadin/vaadin-button": "^2.1.0",
-    "@vaadin/vaadin-checkbox": "^2.2.4",
-    "@vaadin/vaadin-radio-button": "^1.1.2",
-    "@vaadin/vaadin-text-field": "^2.1.3",
     "@webcomponents/webcomponentsjs": "^2.1.3",
     "axios": "^0.20.0",
     "date-fns": "^2.16.1",
@@ -63,14 +59,9 @@
     "lit-element": "^2.0.0",
     "lit-svg-loader": "^0.0.3",
     "lodash": "^4.17.20",
-    "mini-svg-data-uri": "^1.2.3",
-    "nanoid": "^2.0.0",
     "pwa-helpers": "^0.9.0",
     "redux": "^4.0.1",
     "redux-saga": "^1.1.3",
-    "reselect": "^4.0.0",
-    "styled-components": "^5.2.0",
-    "styled-jsx": "^3.3.0",
     "svg-url-loader": "^6.0.0",
     "url-loader": "^4.1.1"
   }

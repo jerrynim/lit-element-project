@@ -46,12 +46,14 @@ class LitTextarea extends LitElement {
       <style>
         ${litTextareaCss}
       </style>
-      <textarea
-        id="textarea"
-        placeholder="${this.placeholder}"
-        .value="${this.value || ""}"
-        @keyup="${this.handleOnChange}"
-      ></textarea>
+      <label>
+        label
+        <textarea
+          placeholder="${this.placeholder}"
+          .value="${this.value || ""}"
+          @keyup="${this.handleOnChange}"
+        ></textarea>
+      </label>
     `;
   }
 }

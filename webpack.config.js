@@ -35,8 +35,9 @@ const polyfills = [
 const assets = [
   {
     from: "public",
-    to: "/public",
+    to: "public",
   },
+  "src/manifest.webmanifest",
 ];
 
 const plugins = [
@@ -83,6 +84,7 @@ module.exports = (webpackEnv) => {
       resolve: {
         extensions: [".js", ".ts", ".d.ts", ".css"],
       },
+
       devServer: {
         port: 3000,
       },

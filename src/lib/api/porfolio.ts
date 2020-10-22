@@ -97,7 +97,7 @@ export const getPortfolioAPI = () => {
         resolve(
           axios.get("api/v1/portfolios/e0e97996-3a22-42e7-b091-0f07e03b0cec")
         ),
-      3000
+      10
     );
   });
   return portfolio;
@@ -108,7 +108,7 @@ export const getPorfolioCommentsAPI = () => {
   const portfolio = new Promise<PortfolioComment[]>((resolve, reject) => {
     setTimeout(() => {
       resolve(comments);
-    }, 3000);
+    }, 10);
   });
   return portfolio;
 };

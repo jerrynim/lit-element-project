@@ -45,7 +45,7 @@ const plugins = [
   new webpack.ProgressPlugin(),
   new HtmlWebpackPlugin({
     filename: "index.html",
-    template: "./src/index.html",
+    template: "src/index.html",
     minify: {
       collapseWhitespace: true,
       minifyCSS: true,
@@ -78,6 +78,7 @@ module.exports = (webpackEnv) => {
     {
       mode,
       output: {
+        publicPath: "/",
         filename: "[name].[chunkhash:8].js",
       },
       entry: appIndex,

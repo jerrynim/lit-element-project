@@ -19,7 +19,6 @@ class TodoView extends connect(store)(LitElement) {
   //* 업데이트 될때 실행 된다
   //? 리덕스 값 불러오기를 이곳에서 하면 될듯
   stateChanged(state: RootState) {
-    console.log("redux 변경");
     this.todos = state.todos.todos;
     this.filter = state.todos.filter;
   }
@@ -36,7 +35,6 @@ class TodoView extends connect(store)(LitElement) {
   */
 
   attributeChangedCallback(name, oldvar, newvar) {
-    console.log(name, oldvar, newvar);
     super.attributeChangedCallback(name, oldvar, newvar);
   }
 
@@ -48,25 +46,21 @@ class TodoView extends connect(store)(LitElement) {
       this.task = "sadfaf";
       // this.setAttribute("task", "이이이잉");
     }, 3000);
-    console.log("mounted");
   }
 
   //* DOM에서 컴포넌트가 제거 될 때
   disconnectedCallback() {
     super.disconnectedCallback();
-    console.log("unmount");
   }
 
   //* 첫 업데이트 시 수행
   firstUpdated(changed) {
     super.firstUpdated(changed);
-    console.log("first");
   }
 
   //* 업데이트 될때마다 수행
   updated(changed) {
     super.update(changed);
-    console.log("update");
   }
   //* 업데이트 해야할지
   shouldUpdate(changed) {

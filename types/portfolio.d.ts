@@ -31,7 +31,7 @@ export type Portfolio = {
   likesCount: number;
   pdfImageCount: number;
   pdfImages: { page: number; path: string }[];
-  previewImagePage: [1, 2, 3];
+  previewImagePage: number[];
   price: string;
   title: string;
   viewCount: number;

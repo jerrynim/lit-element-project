@@ -111,6 +111,10 @@ const portfolioDetailCommentsCss = css`
     padding: 0;
     list-style: none;
   }
+  .portfolio-detail-comments-box {
+    max-width: 1160px;
+    margin: auto;
+  }
   @media only screen and (max-width: 1024px) {
     .portfolio-detail-comments-box {
       padding: 0 20px;

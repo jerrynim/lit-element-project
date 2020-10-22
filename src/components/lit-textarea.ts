@@ -47,7 +47,6 @@ class LitTextarea extends LitElement {
         ${litTextareaCss}
       </style>
       <label>
-        label
         <textarea
           placeholder="${this.placeholder}"
           .value="${this.value || ""}"

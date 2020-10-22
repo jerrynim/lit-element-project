@@ -10,5 +10,4 @@ module.exports = () => ({
     ],
   },
   plugins: [new MiniCssExtractPlugin()],
-  devtool: "source-map",
 });

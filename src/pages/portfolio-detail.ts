@@ -60,6 +60,27 @@ const portfolioDetailCss = css`
     width: 100%;
   }
 
+  .portfolio-detail-needs-pay {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0.225) 100%
+    );
+    cursor: pointer;
+  }
+  .portfolio-detail-needs-pay p {
+    font-weight: 700;
+    font-size: 24px;
+    word-break: keep-all;
+    white-space: break-spaces;
+    text-align: center;
+    color: white;
+  }
   .portfolio-detail-description {
     max-width: 1160px;
     margin: auto;
@@ -210,9 +231,18 @@ class PortfolioDetail extends connect(store)(LitElement) {
                   ${this.portfolio?.pdfImageCount}
                 </div>
                 <div class="portfolio-detail-photos">
-                  ${this.portfolio?.pdfImages.map(
-                    (photo) => html`<lit-image src="${photo.path}" />`
-                  )}
+                  ${this.portfolio?.pdfImages
+                    .filter((photo) =>
+                      this.portfolio?.previewImagePage.includes(photo.page)
+                    )
+                    .map((photo) => html`<lit-image src="${photo.path}" />`)}
+                </div>
+
+                <div class="portfolio-detail-needs-pay">
+                  <p>
+                    ${this.portfolio.pdfImageCount}개의 이미지가 있습니다.
+                    결제를 하시면 이미지를 볼 수 있는 권한이 부여 됩니다.
+                  </p>
                 </div>
                 <p class="portfolio-detail-description">
                   ${this.portfolio?.description}

@@ -8,20 +8,10 @@
     "webpack-dev-server": "webpack-dev-server --history-api-fallback",
     "prod": "npm run webpack -- --env.mode production --env.presets serviceworker",
     "dev": "npm run webpack-dev-server -- --env.mode development",
-    "start": "npm run webpack-dev-server -- --env.mode development",
-    "dev:sw": "npm run webpack-dev-server -- --env.mode development  --env.presets serviceworker"
+    "dev:sw": "npm run webpack-dev-server -- --env.mode development  --env.presets serviceworker",
+    "start": "webpack-dev-server --open --env.mode production --env.presets serviceworker",
+    "build": "npm run webpack -- --env.mode production --env.presets serviceworker"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/vaadin-learning-center/lit-element-tutorial-03-state-management-with-redux.git"
-  },
-  "keywords": [],
-  "author": "Marcus Hellberg <marcus@vaadin.com>",
-  "license": "Apache-2.0",
-  "bugs": {
-    "url": "https://github.com/vaadin-learning-center/lit-element-tutorial-03-state-management-with-redux/issues"
-  },
-  "homepage": "https://github.com/vaadin-learning-center/lit-element-tutorial-03-state-management-with-redux#readme",
   "devDependencies": {
     "@babel/core": "^7.1.5",
     "@babel/plugin-proposal-class-properties": "^7.10.4",

@@ -201,7 +201,8 @@ class PortfolioDetail extends connect(store)(LitElement) {
   //* DOM에 컴포넌트가 추가 될 때
   connectedCallback() {
     super.connectedCallback();
-    store.dispatch(porfolioActions.getPortfolioRequest());
+    const id = window.location.pathname.replace("/portfolio-detail/", "");
+    store.dispatch(porfolioActions.getPortfolioRequest(id));
   }
 
   render() {
@@ -211,6 +212,9 @@ class PortfolioDetail extends connect(store)(LitElement) {
         ${portfolioDetailCss}
       </style>
       <div class="portfolio-detail-header">${MNLogo}</div>
+      <a href="/">home</a>
+      <a href="/portfolio-detail">home</a>
+
       ${guard([this.portfolio, this.loading], () => {
         return html`${!this.loading && this.portfolio
           ? html`

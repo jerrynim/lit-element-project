@@ -1,7 +1,7 @@
 import "./styles.css";
 import "./pages/portfolio-detail";
 import "./components/portal-component";
-
+import "./components/lit-app";
 import { Router } from "@vaadin/router";
 async function registerSW() {
   if ("serviceWorker" in navigator) {
@@ -21,7 +21,7 @@ window.addEventListener("load", () => {
 });
 
 function initRouter() {
-  const router = new Router(document.querySelector("lit-app"));
+  const router = new Router(document.querySelector("main"));
   router.setRoutes([
     {
       path: "/",

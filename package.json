@@ -9,7 +9,7 @@
     "prod": "npm run webpack -- --env.mode production --env.presets serviceworker",
     "dev": "npm run webpack-dev-server -- --env.mode development",
     "dev:sw": "npm run webpack-dev-server -- --env.mode development  --env.presets serviceworker",
-    "start": "webpack-dev-server --open --env.mode production --env.presets serviceworker",
+    "start": "yarn dev",
     "build": "npm run webpack -- --env.mode production --env.presets serviceworker"
   },
   "devDependencies": {

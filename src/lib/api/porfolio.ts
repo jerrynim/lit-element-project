@@ -90,15 +90,9 @@ const comments: PortfolioComment[] = [
   },
 ];
 //* 포트폴리오 상세 불러오기 API
-export const getPortfolioAPI = () => {
+export const getPortfolioAPI = (id: string) => {
   const portfolio = new Promise<AxiosResponse<Portfolio>>((resolve, reject) => {
-    setTimeout(
-      () =>
-        resolve(
-          axios.get("api/v1/portfolios/e0e97996-3a22-42e7-b091-0f07e03b0cec")
-        ),
-      2000
-    );
+    setTimeout(() => resolve(axios.get(`api/v1/portfolios/${id}`)), 2000);
   });
   return portfolio;
 };

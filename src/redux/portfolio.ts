@@ -32,7 +32,7 @@ const porfolio = createSlice({
     //? 포트폴리오 상세 불러오기 async
 
     //* 포트폴리오 상세 불러오기 req
-    getPortfolioRequest(state, action: PayloadAction<undefined>) {
+    getPortfolioRequest(state, action: PayloadAction<string>) {
       state.detail.loading = true;
     },
     //* 포트폴리오 상세 불러오기 success
@@ -137,7 +137,7 @@ function* watchGetPorfolio() {
   } = porfolioActions;
   yield takeLatest(getPortfolioRequest, function* (action) {
     try {
-      const { data } = yield call(getPortfolioAPI);
+      const { data } = yield call(getPortfolioAPI, action.payload);
       yield put(getPorfolioSuccess(data));
     } catch (err) {
       yield put(getPorfolioFail());

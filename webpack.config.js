@@ -10,7 +10,6 @@ const dotenv = require("dotenv").config({
 });
 const modeConfig = (env) =>
   require(`./build-utils/webpack.${env.mode}.js`)(env);
-const loadPresets = require("./build-utils/loadPresets");
 
 const webcomponentsjs = "./node_modules/@webcomponents/webcomponentsjs";
 
@@ -71,6 +70,7 @@ function getClientEnv(nodeEnv) {
     ),
   };
 }
+
 module.exports = (webpackEnv) => {
   const { mode, presets } = webpackEnv;
   env = getClientEnv(webpackEnv);
@@ -121,7 +121,6 @@ module.exports = (webpackEnv) => {
         }),
       ],
     },
-    modeConfig({ mode, presets }),
-    loadPresets({ mode, presets })
+    modeConfig({ mode, presets })
   );
 };

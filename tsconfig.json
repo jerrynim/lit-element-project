@@ -19,7 +19,6 @@
       "rootDir": "./"
     },
     "include": [
-      "**/*.ts",
-      "src/redux/portfolio.ts"
+      "**/*.ts"
     ]
   }

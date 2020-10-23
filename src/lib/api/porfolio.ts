@@ -1,5 +1,4 @@
 import { AxiosResponse } from "axios";
-import { update } from "lodash";
 import { Portfolio, PortfolioComment } from "../../../types/portfolio";
 import axios from "./apiClient";
 

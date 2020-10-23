@@ -7,6 +7,8 @@ import {
   query,
 } from "lit-element";
 import { connect } from "pwa-helpers";
+import { Router } from "@vaadin/router";
+
 import { Portfolio, PortfolioComment } from "../../types/portfolio";
 import { RootState, store } from "../redux/store";
 import { until } from "lit-html/directives/until.js";
@@ -148,12 +150,12 @@ class PortfolioDetailComments extends connect(store)(LitElement) {
   }
 
   async addComment() {
-    await loginAPI();
-    await addPortfolioAPI();
-    render(
-      html`<div>댓글은 아직이에용.</div>`,
-      document.querySelector("portal-component")!
-    );
+    // await addPortfolioAPI();
+    Router.go("/");
+    // render(
+    //   html`<div>댓글은 아직이에용.</div>`,
+    //   document.querySelector("portal-component")!
+    // );
   }
   render() {
     return html`

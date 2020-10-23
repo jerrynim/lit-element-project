@@ -19,10 +19,17 @@ class LitApp extends LitElement {
     window.addEventListener("load", (e) => {
       this.initRouter();
     });
-
+    console.log("마운트");
     window.addEventListener("hashchange", (e) => {
       console.log(e);
     });
+    window.onhashchange = () => {
+      console.log("hi");
+    };
+  }
+
+  public onAfterEnter(location: Location): void {
+    console.log(location);
   }
 
   initRouter() {

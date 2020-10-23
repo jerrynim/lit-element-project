@@ -118,7 +118,9 @@ export const loginAPI = () =>
 export const addPortfolioAPI = () =>
   axios.post("api/v1/portfolios", {
     title: "서울메이트 - 룸메이트 매칭 서비스",
-    categories: "마케팅",
+    category: "마케팅",
+    tags: ["마케팅"],
+    pdfFilePath: "http://localhost:5000/uploads/some",
     description: `ⓒ2019
     copyright by Heo Ji Eun
      
@@ -145,8 +147,6 @@ export const addPortfolioAPI = () =>
     
     감사합니다`,
     contents: ["마케팅이란?", "마케팅 직무에 대한 이해"],
-    bankname: "신한",
-    accountNumber: "110-344-375136",
     price: 10000,
     coverImage: "https://notefolio.net/truu/173593",
     previewImagePage: [1, 2, 3],

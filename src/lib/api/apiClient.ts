@@ -1,7 +1,7 @@
 import Axios, { AxiosError } from "axios";
 
 const axios = Axios.create({
-  baseURL: "http://api-happy-portfolio.openknowl.com/",
+  baseURL: "https://api-happy-portfolio.openknowl.com/",
   withCredentials: true,
 });
 
